@@ -1,0 +1,14 @@
+.headerPDF {
+    background-color:grey;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.bodyPDF {
+    background-color: rgb(28, 29, 28);
+    height: 90vh;
+}
