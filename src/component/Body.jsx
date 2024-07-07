@@ -1,23 +1,27 @@
 import { useEffect, useState } from 'react';
-// import styles from './Body.module.css'
 import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
-import encodeData from '../assets/base64/pdf.json'
+import base64Data from '../assets/base64/pdf.json'
+// import styles from './Body.module.css'
 
 function Body() {
 
-  const [data, setData] = useState()
+  const [pdfUrl, setPdfUrl] = useState()
 
   useEffect(() => {
-    const res = base64ToArrayBuffer(encodeData.file.data)
-    const blob = new Blob([res], { type: 'application/pdf' })
-    const url = URL.createObjectURL(blob)
+    // compute ArrayBuffer from PDF's base64 data
+    const res1 = computeBase64ToArrayBuffer(base64Data.file.data)
 
-    setData(url)
+    // compute PDF URL from PDF's ArrayBuffer data
+    const res2 = computeArrayBufferToPdfURL(res1)
+
+    // set PDF URL in state
+    setPdfUrl(res2)
   }, [])
 
-  const base64ToArrayBuffer = (base64) => {
+  // compute ArrayBuffer from PDF's base64
+  const computeBase64ToArrayBuffer = (base64) => {
     var binaryString = atob(base64);
     var bytes = new Uint8Array(binaryString.length);
     for (var i = 0; i < binaryString.length; i++) {
@@ -26,10 +30,17 @@ function Body() {
     return bytes.buffer;
   }
 
+  // compute PDF URL from ArrayBuffer
+  const computeArrayBufferToPdfURL = (arraybufferdata) => {
+    const blob = new Blob([arraybufferdata], { type: 'application/pdf' })
+    const url = URL.createObjectURL(blob)
+    return url
+  }
+
   return (
     <>
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-        {data && (<Viewer fileUrl={data} />)}
+        {pdfUrl && (<Viewer fileUrl={pdfUrl} />)}
       </Worker>
     </>
   );
