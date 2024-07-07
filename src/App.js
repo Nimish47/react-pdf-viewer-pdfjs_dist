@@ -1,10 +1,10 @@
-import PDFComponent from "./component/PDFComponent";
 import styles from './App.module.css'
+import PDFContainer from "./component/PDFContainer";
 
 function App() {
   return (
     <div className={styles.appContainer}>
-      <PDFComponent />
+      <PDFContainer />
     </div>
   );
 }
