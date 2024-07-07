@@ -3,8 +3,9 @@ import { Worker } from '@react-pdf-viewer/core';
 import { Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import base64Data from '../assets/base64/pdf.json'
+import styles from './PDFContainer.module.css'
 
-function PDFContainer() {
+function PDFContainer({ toggleHandler }) {
 
   const [pdfUrl, setPdfUrl] = useState()
 
@@ -38,11 +39,19 @@ function PDFContainer() {
   }
 
   return (
-    <>
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-        {pdfUrl && (<Viewer fileUrl={pdfUrl} />)}
-      </Worker>
-    </>
+    <div className={styles.backdrop}>
+      <div className={styles.modal}>
+        <div
+          onClick={toggleHandler}
+          className={styles.toggler}
+        >
+          <span>Click here to close the PDF window</span>
+        </div>
+        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+          {pdfUrl && (<Viewer fileUrl={pdfUrl} />)}
+        </Worker>
+      </div>
+    </div>
   );
 }
 

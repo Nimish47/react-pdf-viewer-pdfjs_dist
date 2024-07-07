@@ -6,21 +6,25 @@ import PDFContainer from "./component/PDFContainer";
 function App() {
 
   const [toggle, setToggle] = useState(false)
-  const toggleFunc = () => { setToggle(!toggle) }
+
+  const toggleHandler = () => { setToggle(!toggle) }
 
   return (
-    <div className={styles.container}>
-      <div
-        className={styles.home}
-        onClick={toggleFunc}
-      >
-        <Home />
+    <>
+      <div className={styles.container}>
+        <div
+          className={styles.home}
+          onClick={toggleHandler}
+        >
+          <Home />
+        </div>
       </div>
+
       {toggle && (<div className={styles.pdfContainer}>
-        <PDFContainer />
+        <PDFContainer toggleHandler={toggleHandler}/>
       </div>)
       }
-    </div>
+    </>
   );
 }
 

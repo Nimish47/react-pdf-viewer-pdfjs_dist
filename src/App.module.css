@@ -23,6 +23,6 @@
 
 .pdfContainer {
     width: 55%;
-    height: 100vh;
+    max-height: 100vh;
     margin: 0 auto;
 }
