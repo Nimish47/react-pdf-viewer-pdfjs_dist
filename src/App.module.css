@@ -1,4 +1,27 @@
-.appContainer {
+.container {
+    max-height: 100vh;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    margin-top: 150px;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 30px;
+    background-color: #ffffff;
+    font-weight: 700;
+}
+
+.home:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.pdfContainer {
     width: 55%;
     height: 100vh;
     margin: 0 auto;
